@@ -1,3 +1,4 @@
+import 'package:cefdivision/stopwatch/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'stopwatch/stopwatch_exp.dart';
 
@@ -12,7 +13,7 @@ class MyCustomStop extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyStopWatch(),
+      home: LoginFromScreen(),
     );
   }
 }

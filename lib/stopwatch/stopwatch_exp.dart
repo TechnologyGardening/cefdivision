@@ -62,6 +62,27 @@ class _MyStopWatchState extends State<MyStopWatch> {
     return "$seconds seconds";
   }
 
+  void _lapclear() {
+    setState(() {
+      laps.clear();
+    });
+    print(laps);
+  }
+
+  Widget _buildCounter(BuildContext context) {
+    return Container(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Lap ${laps.length + 1}',
+            style: Theme.of(context).textTheme.headlineLarge),
+        const SizedBox(height: 15),
+        Text(_millisecondstoText(milliseconds),
+            style: Theme.of(context).textTheme.headlineLarge),
+      ],
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,10 +90,10 @@ class _MyStopWatchState extends State<MyStopWatch> {
         title: const Text('StopWatch'),
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text(
-          _millisecondstoText(milliseconds),
-          style: const TextStyle(fontSize: 40),
-        ),
+        // Text(
+        //   _millisecondstoText(milliseconds), //   style: const TextStyle(fontSize: 40),
+        // ),
+        _buildCounter(context),
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -87,6 +108,15 @@ class _MyStopWatchState extends State<MyStopWatch> {
             ),
             const SizedBox(width: 20),
             ElevatedButton(
+              onPressed: _stopTimer,
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(Colors.red),
+                foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
+              ),
+              child: const Text('Stop'),
+            ),
+            const SizedBox(width: 20),
+            ElevatedButton(
               onPressed: _onClickLap,
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll<Color>(Colors.blue),
@@ -96,12 +126,12 @@ class _MyStopWatchState extends State<MyStopWatch> {
             ),
             const SizedBox(width: 20),
             ElevatedButton(
-              onPressed: _stopTimer,
+              onPressed: _lapclear,
               style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.red),
+                backgroundColor: MaterialStatePropertyAll<Color>(Colors.orange),
                 foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
               ),
-              child: const Text('Stop'),
+              child: const Text('Clear'),
             ),
           ],
         )
